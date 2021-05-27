@@ -16,7 +16,7 @@ def homep(request):
 def index(request):
     if request.method=='POST':
         # golbal variables
-        api_key = 'RGAPI-97e244c3-86b1-460b-bf9e-333d33757ff1'
+        api_key = 'RGAPI-1e4e7ceb-d1b3-4d54-bff9-e0d83e9a6064'
         watcher = LolWatcher(api_key)
         my_region = 'LA1'
         try:
