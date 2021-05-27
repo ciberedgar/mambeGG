@@ -28,7 +28,7 @@ SECRET_KEY = '=94l-wun1f_yo5ealw9%lr5rl@miy6@u(g*yj-l0h!o_b7ugxk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','sampledomain.com']
+ALLOWED_HOSTS = ['127.0.0.1','mambegg.herokuapp.com']
 
 STATIC_URL = '/static/'
 # Application definition
