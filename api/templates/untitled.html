@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+{% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Mambe</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome-all.min.css'  %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css'  %}">
+    <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/divider-text-middle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/untitled.css' %}">
+</head>
+
+<body style="background: url(&quot;static/assets/img/dogs/Background.png&quot;);">
+    <header>
+        <div class="row g-0" style="margin-top: 307px;">
+            <div class="col"></div>
+            <div class="col"><img class="img-fluid" src="static/assets/img/icon.png"></div>
+            <div class="col"></div>
+        </div>
+        <div class="row g-0">
+            <div class="col"></div>
+            <div class="col-auto">
+            <form method = "post" class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+            {% csrf_token %}
+                <input class="border rounded-pill form-control-lg" type="text" autocomplete="off" style="min-height: 46px;width: 688px;" name = "nombre" placeholder="     Introduce el nombre de invocador...">
+            </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </header>
+    <footer class="text-center justify-content-center align-items-center align-content-center" style="margin-top: 34px; position: absolute; bottom: 0; width: 100%; display: table-row;"><img class="img-fluid" src="static/assets/img/Componente%207%20–%201.png"></footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/chart.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>

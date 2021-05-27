@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+{% load static %}
+{% load mathfilters %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - Mambe.GG</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/divider-text-middle.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+</head>
+
+<body id="page-top">
+{% load static %}
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-moon"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>Mambe.GG</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link active" href="404"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="404"><i class="fas fa-table"></i><span>Historial</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="404"><i class="far fa-user-circle"></i><span>Login</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="404"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <form method = "post" class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        {% csrf_token %}
+                            <div class="input-group"><input class="bg-light form-control border-0 small" name = "nombre" type="" placeholder="Nombre de invocador..." autocomplete="off"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                        </form>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
+                                    <form class="me-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 col-xl-6 col-xxl-5">
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col text-center"><img class="border rounded-circle img-profile" src="{{icon}}"></div>
+                                    </div>
+                                    <div class="col" style="margin-top: 12px;">
+                                        <h3 class="text-truncate text-break text-capitalize text-center text-dark"><em><span style="text-decoration: underline;">{{results.name}}</span></em>&nbsp;<span class="text-black-50">#LAN</span><span class="text-black-50">&nbsp;~{{results.summonerLevel}}</span></h3>
+                                    </div><div class="dropdown-divider"></div>
+                                    <div class="row">
+                                        <div class="col-3"><img class="img-fluid" src="{% static 'assets/img/Emblem_'%}{{soloimg}}"></div>
+                                        <div class="col-9 col-xxl-9 m-auto">
+                                            <h3 class="text-dark d-xl-flex">{{liga.0.tier}} {{liga.0.rank}}<span class="text-black-50">&nbsp; &nbsp;~</span><span class="text-black-50">Solo</span></h3>
+                                            <h3 class="text-black-50 d-xl-flex">{{liga.0.wins}}W - {{liga.0.losses}}L<span class="text-dark">&nbsp; ~{{porcentajef}}%</span></h3>
+                                            <div class="progress rubberBand animated mb-4" style="background: var(--bs-red);">
+                                                <div class="progress-bar bg-success" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentajef}}%;"><span class="visually-hidden">50%</span></div>
+                                            </div>
+                                        </div>
+                                    </div><div class="dropdown-divider"></div>
+                                    <div class="row">
+                                        <div class="col-3"><img class="img-fluid" src="{% static 'assets/img/Emblem_'%}{{fleximg}}"></div>
+                                        <div class="col-9 col-xxl-9 m-auto">
+                                            <h3 class="text-dark d-xl-flex">{{liga.1.tier}} {{liga.1.rank}}<span class="text-black-50">&nbsp; &nbsp;~</span><span class="text-black-50">Flex</span></h3>
+                                            <h3 class="text-black-50 d-xl-flex">{{liga.1.wins}}W - {{liga.1.losses}}L<span class="text-dark">&nbsp; ~{{porcentajes}}%</span></h3>
+                                            <div class="progress rubberBand animated mb-4" style="background: var(--bs-red);">
+                                                <div class="progress-bar bg-success" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: {{porcentajes}}%;"><span class="visually-hidden">50%</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="text-primary m-0 fw-bold">GPI</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;radar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;ASSISTS&quot;,&quot;DEATHS&quot;,&quot;KILLS&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;backgroundColor&quot;:[&quot;rgba(214,0,255,0.15730042016806722)&quot;,&quot;rgba(214,0,255,0.15730042016806722)&quot;,&quot;rgba(214,0,255,0.15730042016806722)&quot;],&quot;borderColor&quot;:[&quot;rgba(214,0,255,0.15730042016806722)&quot;,&quot;rgba(214,0,255,0.15730042016806722)&quot;,&quot;rgba(214,0,255,0.15730042016806722)&quot;],&quot;data&quot;:[&quot;{{ga}}&quot;,&quot;{{gd}}&quot;,&quot;{{gk}}&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}"></canvas></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-12 col-lg-12 col-xl-6 col-xxl-7">
+                            <div class="card shadow mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h6 class="text-primary fw-bold m-0">GPI</h6>
+                                    <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
+                                        <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
+                                            <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="card shadow mb-4">
+                                                <div class="card-header py-3">
+                                                    <h6 class="text-primary m-0 fw-bold">VICTORIAS/DERROTAS</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;doughnut&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;VICTORIAS&quot;,&quot;DERROTAS&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;backgroundColor&quot;:[&quot;rgba(9,126,38,0.35730042016806722)&quot;,&quot;rgba(126,9,21,0.35730042016806722)&quot;],&quot;borderColor&quot;:[&quot;rgba(9,126,38,0.15730042016806722)&quot;,&quot;rgba(126,9,21,0.15730042016806722)&quot;],&quot;data&quot;:[&quot;{{win}}&quot;,&quot;{{lose}}&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}"></canvas></div>
+                                                <div class="text-center small mt-4"><span class="me-2"><i class="fas fa-circle text-success"></i> VICTORIAS</span><span class="me-2"><i class="fas fa-circle text-danger"></i> DERROTAS</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card shadow border-start-info py-2">
+                                                <div class="card-body">
+                                                    <div class="row align-items-center no-gutters">
+                                                        <div class="col me-2">
+                                                            <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Promedio de minions</span></div>
+                                                            <div class="row g-0 align-items-center">
+                                                                <div class="col-auto">
+                                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>{{prom}}</span></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-auto"><i class="fas fa-stream fa-2x text-gray-300"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card shadow border-start-warning py-2">
+                                                <div class="card-body">
+                                                    <div class="row align-items-center no-gutters">
+                                                        <div class="col me-2">
+                                                            <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Promedio de kda</span></div>
+                                                            <div class="text-dark fw-bold h5 mb-0"><span>{{prokda}}</span></div>
+                                                        </div>
+                                                        <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card shadow border-start-success py-2">
+                                                <div class="card-body">
+                                                    <div class="row align-items-center no-gutters">
+                                                        <div class="col me-2">
+                                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Promedio de daño</span></div>
+                                                            <div class="text-dark fw-bold h5 mb-0"><span>{{prodmg}}</span></div>
+                                                        </div>
+                                                        <div class="col-auto"><i class="fas fa-tint fa-2x text-gray-300"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card shadow border-start-primary py-2">
+                                                <div class="card-body">
+                                                    <div class="row align-items-center no-gutters">
+                                                        <div class="col me-2">
+                                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Promedio de oro</span></div>
+                                                            <div class="text-dark fw-bold h5 mb-0"><span>{{proro}}</span></div>
+                                                        </div>
+                                                        <div class="col-auto"><i class="fas fa-coins fa-2x text-gray-300"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card shadow border-start-info py-2">
+                                                <div class="card-body">
+                                                    <div class="row align-items-center no-gutters">
+                                                        <div class="col me-2">
+                                                            <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Promedio de lo que mas hace:</span></div>
+                                                            <div class="row g-0 align-items-center">
+                                                                <div class="col-auto">
+                                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>{{proh}}</span></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-auto"><i class="fas fa-user fa-2x text-gray-300"></i></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <div class="card shadow mb-4">
+                                                <div class="card-header py-3">
+                                                    <h6 class="text-primary m-0 fw-bold">KDA DE ULTIMAS PARTIDAS</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Partida1&quot;,&quot;Partida2&quot;,&quot;Partida3&quot;,&quot;Partida4&quot;,&quot;Partida5&quot;,&quot;Partida6&quot;,&quot;Partida7&quot;,&quot;Partida8&quot;,&quot;Partida9&quot;,&quot;Partida10&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;backgroundColor&quot;:[&quot;rgba(214,0,255,0.15730042016806722)&quot;,&quot;rgba(214,0,255,0.15730042016806722)&quot;,&quot;rgba(214,0,255,0.15730042016806722)&quot;],&quot;borderColor&quot;:[&quot;rgba(214,0,255,0.15730042016806722)&quot;,&quot;rgba(214,0,255,0.15730042016806722)&quot;,&quot;rgba(214,0,255,0.15730042016806722)&quot;],&quot;data&quot;:[&quot;{{matches.matches.0.kda}}&quot;,&quot;{{matches.matches.1.kda}}&quot;,&quot;{{matches.matches.2.kda}}&quot;,&quot;{{matches.matches.3.kda}}&quot;,&quot;{{matches.matches.4.kda}}&quot;,&quot;{{matches.matches.5.kda}}&quot;,&quot;{{matches.matches.6.kda}}&quot;,&quot;{{matches.matches.7.kda}}&quot;,&quot;{{matches.matches.8.kda}}&quot;,&quot;{{matches.matches.9.kda}}&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}"></canvas></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div style="text-align:center;">
+                                        <h2 class="divider-style" style="margin-top: -11px;"><span>HISTORIAL</span></h2>
+                                    </div>
+                                    {% for x in matches.matches%}
+                                    {% if x.win %}
+                                    <div class="card mb-4">
+                                        <div class="card-body" style="background: rgba(28,200,138,0.6);">
+                                            <div class="col">
+                                                <h6 class="text-light border-dark">{{x.lane}}<span>&nbsp;| {{x.date}} | {{x.duration}} MIN | VICTORIA</span></h6>
+                                            </div><div class="dropdown-divider"></div>
+                                            <div class="row">
+                                                <div class="col-1 align-self-center m-auto"><img class="img-fluid border rounded-circle border-warning shadow-lg flex-grow-1" src="http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/{{x.championName}}.png"></div>
+                                                <div class="col-auto m-auto"><img class="img-fluid" src="{{x.spell1}}" style="width: 34px;"><img class="img-fluid" src="{{x.spell2}}" style="width: 34px;margin-left: 4px;">
+
+                                                </div>
+                                                <div class="col-2 m-auto">
+                                                    <h3 class="text-dark d-xl-flex" style="margin-bottom: -3px;">{{x.kills}}/ {{x.deaths}} / {{x.assists}}</h3>
+                                                    <h3 class="text-black-50 d-xl-flex" style="margin-bottom: -3px;">{{x.kda}} KDA</h3>
+                                                </div>
+                                                <div class="col-4 m-auto">
+                                                    <h3 class="text-dark d-xl-flex" style="margin-bottom: -3px;">{{x.minions}} ({{x.cs}}) CS</h3>
+                                                    <h3 class="text-black-50 d-xl-flex" style="margin-bottom: -3px;">{{x.cs10}} @ 10M</h3>
+                                                </div>
+                                                <div class="col-auto m-auto">
+                                                {% if x.item1 != 0 %}
+                                                <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item1}}.png" style="width: 34px;margin-bottom: 4px;">
+                                                {%else%}
+                                                <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;margin-bottom: 4px;">
+                                                {%endif%}
+                                                {% if x.item2 != 0 %}
+                                                <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item2}}.png" style="width: 34px;margin-left: 4px;margin-bottom: 4px;">
+                                                {%else%}
+                                                <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;margin-left: 4px;margin-bottom: 4px;">
+                                                {%endif%}
+                                                {% if x.item3 != 0 %}
+                                                <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item3}}.png" style="width: 34px;margin-left: 4px;margin-bottom: 4px;">
+                                                {%else%}
+                                                <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;margin-left: 4px;margin-bottom: 4px;">
+                                                {%endif%}         
+                                                    <div class="row">
+                                                        <div class="col-auto m-auto">
+                                                        {% if x.item4 != 0 %}
+                                                        <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item4}}.png" style="width: 34px;">
+                                                        {%else%}
+                                                        <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;">
+                                                        {%endif%}
+                                                        {% if x.item5 != 0 %}
+                                                        <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item5}}.png" style="width: 34px;margin-left: 4px;">
+                                                        {%else%}
+                                                        <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;margin-left: 4px;">
+                                                        {%endif%}
+                                                        {% if x.item6 != 0 %}
+                                                        <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item6}}.png" style="width: 34px;margin-left: 4px;">
+                                                        {%else%}
+                                                        <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;margin-left: 4px;">
+                                                        {%endif%}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col-auto m-auto">
+                                                            <ul class="list-unstyled">
+                                                                <li class="text-end" style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i1}}.png" /> {{x.p1}}</li>
+                                                                <li class="text-end" style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i2}}.png" /> {{x.p2}}</li>
+                                                                <li class="text-end" style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i3}}.png" /> {{x.p3}}</li>
+                                                                <li class="text-end" style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i4}}.png" /> {{x.p4}}</li>
+                                                                <li class="text-end" style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i5}}.png" /> {{x.p5}}</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-5 m-auto" style="color: var(--bs-light);">
+                                                            <ul class="list-unstyled" style="color: var(--bs-light);">
+                                                                <li style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i6}}.png" /> {{x.p6}}</li>
+                                                                <li style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i7}}.png" /> {{x.p7}}</li>
+                                                                <li style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i8}}.png" /> {{x.p8}}</li>
+                                                                <li style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i9}}.png" /> {{x.p9}}</li>
+                                                                <li style="color: var(--bs-light);"><img style="width: 18px;height: 17px;" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i10}}.png" /> {{x.p10}}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    {%else%}
+                                    <div class="card mb-4">
+                                        <div class="card-body" style="background: rgba(231,74,59,0.69);">
+                                            <div class="col">
+                                                <h6 class="text-light border-dark">{{x.lane}}<span>&nbsp;| {{x.date}} | {{x.duration}} MIN | DERROTA</span></h6>
+                                            </div><div class="dropdown-divider"></div>
+                                            <div class="row">
+                                                <div class="col-1 align-self-center m-auto"><img class="img-fluid border rounded-circle border-warning shadow-lg flex-grow-1" src="http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/{{x.championName}}.png"></div>
+                                                <div class="col-auto m-auto"><img class="img-fluid" src="{{x.spell1}}" style="width: 34px;"><img class="img-fluid" src="{{x.spell2}}" style="width: 34px;margin-left: 4px;">
+                                                </div>
+                                                <div class="col-2 m-auto">
+                                                    <h3 class="text-dark d-xl-flex" style="margin-bottom: -3px;">{{x.kills}}/ {{x.deaths}} / {{x.assists}}</h3>
+                                                    <h3 class="text-black-50 d-xl-flex" style="margin-bottom: -3px;">{{x.kda}} KDA</h3>
+                                                </div>
+                                                <div class="col-4 m-auto">
+                                                    <h3 class="text-dark d-xl-flex" style="margin-bottom: -3px;">{{x.minions}} ({{x.cs}}) CS</h3>
+                                                    <h3 class="text-black-50 d-xl-flex" style="margin-bottom: -3px;">{{x.cs10}} @ 10M</h3>
+                                                </div>
+                                                <div class="col-auto m-auto">
+                                                {% if x.item1 != 0 %}
+                                                <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item1}}.png" style="width: 34px;margin-bottom: 4px;">
+                                                {%else%}
+                                                <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;margin-bottom: 4px;">
+                                                {%endif%}
+                                                {% if x.item2 != 0 %}
+                                                <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item2}}.png" style="width: 34px;margin-left: 4px;margin-bottom: 4px;">
+                                                {%else%}
+                                                <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;margin-left: 4px;margin-bottom: 4px;">
+                                                {%endif%}
+                                                {% if x.item3 != 0 %}
+                                                <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item3}}.png" style="width: 34px;margin-left: 4px;margin-bottom: 4px;">
+                                                {%else%}
+                                                <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;margin-left: 4px;margin-bottom: 4px;">
+                                                {%endif%}         
+                                                    <div class="row">
+                                                        <div class="col-auto m-auto">
+                                                        {% if x.item4 != 0 %}
+                                                        <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item4}}.png" style="width: 34px;">
+                                                        {%else%}
+                                                        <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;">
+                                                        {%endif%}
+                                                        {% if x.item5 != 0 %}
+                                                        <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item5}}.png" style="width: 34px;margin-left: 4px;">
+                                                        {%else%}
+                                                        <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;margin-left: 4px;">
+                                                        {%endif%}
+                                                        {% if x.item6 != 0 %}
+                                                        <img class="img-fluid" src="http://ddragon.leagueoflegends.com/cdn/11.10.1/img/item/{{x.item6}}.png" style="width: 34px;margin-left: 4px;">
+                                                        {%else%}
+                                                        <img class="img-fluid" src="https://forums.comunidades.riotgames.com/t5/image/serverpage/image-id/2359iD77EBE3A42BBF549?v=v2" style="width: 34px;margin-left: 4px;">
+                                                        {%endif%}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col-auto m-auto">
+                                                            <ul class="list-unstyled">
+                                                                <li class="text-end" style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i1}}.png" /> {{x.p1}}</li>
+                                                                <li class="text-end" style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i2}}.png" /> {{x.p2}}</li>
+                                                                <li class="text-end" style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i3}}.png" /> {{x.p3}}</li>
+                                                                <li class="text-end" style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i4}}.png" /> {{x.p4}}</li>
+                                                                <li class="text-end" style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i5}}.png" /> {{x.p5}}</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-5 m-auto" style="color: var(--bs-light);">
+                                                            <ul class="list-unstyled" style="color: var(--bs-light);">
+                                                                <li style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i6}}.png" /> {{x.p6}}</li>
+                                                                <li style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i7}}.png" /> {{x.p7}}</li>
+                                                                <li style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i8}}.png" /> {{x.p8}}</li>
+                                                                <li style="color: var(--bs-light);"><img style="width: 18px;height: 17px;color: var(--bs-light);" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i9}}.png" /> {{x.p9}}</li>
+                                                                <li style="color: var(--bs-light);"><img style="width: 18px;height: 17px;" src="http://ddragon.leagueoflegends.com/cdn/11.11.1/img/profileicon/{{x.i10}}.png" /> {{x.p10}}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {%endif%}
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Mambe.GG 2021</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/chart.min.js' %}"></script>
+    <script src="{% static 'assets/js/bs-init.js' %}"></script>
+    <script src="{% static 'assets/js/theme.js' %}"></script>
+</body>
+
+</html>
