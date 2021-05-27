@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import mimetypes
+import os
 mimetypes.add_type ("text/css", ".css", True)
 
 
@@ -30,7 +31,14 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','mambegg.herokuapp.com']
 
-# Application definition
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
