@@ -31,14 +31,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','mambegg.herokuapp.com']
 
-STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
